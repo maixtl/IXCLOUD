@@ -40,6 +40,7 @@ if [[ $choice -eq 1 ]]; then
     cd CloudPanel
 
     # Установка зависимостей и запуск скриптов
+    npm update
     npm install
     npm run seed
     npm run createUser
