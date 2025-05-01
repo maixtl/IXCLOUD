@@ -25,7 +25,7 @@ if [[ $choice -eq 1 ]]; then
     sudo apt update
     sudo apt install -y nodejs git unzip
     git clone https://github.com/maixtl/IXCLOUD.git
-    cd CloudPanel
+    cd CloudPanel.zip
     unzip CloudPanel.zip
     cd CloudPanel
     npm install
