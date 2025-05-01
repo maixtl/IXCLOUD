@@ -1,4 +1,4 @@
-#!/bin/bash
+script_content = '''#!/bin/bash
 
 # ASCII-арт заголовок
 cat << "EOF"
@@ -7,7 +7,7 @@ cat << "EOF"
    / / |   / / / / /   / __/  \__ \/ /   / /   / / / / / / / / / /
  _/ / /   | / / / /___/ /___ ___/ / /___/ /___/ /_/ / /_/ / /_/ / 
 /___//_/|_|/_/ /_____/_____//____/\____/_____\/____/\____/_____/  
-                                                                   
+
 EOF
 
 echo "CloudPanel Installer"
@@ -18,16 +18,23 @@ echo "2 - Uninstall CloudPanel"
 read -p "Enter your choice: " choice
 
 if [[ $choice -eq 1 ]]; then
-
     sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
     sudo apt update
     sudo apt install -y nodejs git unzip
+
+    # Клонирование репозитория
     git clone https://github.com/maixtl/IXCLOUD.git
-    cd CloudPanel.zip
+    cd IXCLOUD
+
+    # Распаковка архива
     unzip CloudPanel.zip
+
+    # Переход в распакованную директорию
     cd CloudPanel
+
+    # Установка зависимостей и запуск скриптов
     npm install
     npm run seed
     npm run createUser
@@ -42,3 +49,10 @@ elif [[ $choice -eq 2 ]]; then
 else
     echo "Invalid choice. Exiting."
 fi
+'''
+
+file_path = "/mnt/data/install.sh"
+with open(file_path, "w") as file:
+    file.write(script_content)
+
+file_path
